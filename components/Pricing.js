@@ -25,7 +25,7 @@ function Check() {
 
 export default function Pricing() {
   const { t } = useT();
-  const highlightedIndex = 1; // Pro
+  const highlightedIndex = PLAN_IDS.indexOf("pro");
   const [openTier, setOpenTier] = useState(null);
 
   const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "info@shopbyjlc.com";
@@ -33,6 +33,10 @@ export default function Pricing() {
   const handleTierClick = (planId) => {
     if (PLANS[planId]?.contactOnly) {
       window.location.href = `mailto:${contactEmail}?subject=ShopByJLC%20Enterprise%20inquiry`;
+      return;
+    }
+    if (PLANS[planId]?.freeTrial) {
+      window.location.href = `mailto:${contactEmail}?subject=ShopByJLC%20free%20trial`;
       return;
     }
     setOpenTier(planId);
@@ -62,10 +66,11 @@ export default function Pricing() {
           <p className="mt-4 text-lg text-ink-500">{t.pricing.subtitle}</p>
         </div>
 
-        <div className="mt-14 grid gap-6 lg:grid-cols-4">
+        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {t.pricing.tiers.map((tier, i) => {
             const highlighted = i === highlightedIndex;
             const planId = PLAN_IDS[i];
+            const isFreeTrial = PLANS[planId]?.freeTrial;
             return (
               <div
                 key={tier.name}
@@ -86,14 +91,16 @@ export default function Pricing() {
                 </div>
                 <p className="mt-2 text-sm text-ink-500">{tier.description}</p>
 
-                <div className="mt-6 flex items-baseline gap-1">
-                  <span className="text-4xl font-bold tracking-tight text-ink-800">
+                <div className="mt-6 flex items-baseline gap-1 whitespace-nowrap">
+                  <span className="text-2xl font-bold tracking-tight text-ink-800 xl:text-xl 2xl:text-2xl">
                     {tier.price}
                   </span>
-                  <span className="text-sm font-medium text-ink-400">{t.pricing.perMonth}</span>
+                  {!isFreeTrial && (
+                    <span className="text-xs font-medium text-ink-400">{t.pricing.perMonth}</span>
+                  )}
                 </div>
 
-                {!PLANS[planId]?.contactOnly && t.pricing.trialBadge && (
+                {!PLANS[planId]?.contactOnly && !isFreeTrial && t.pricing.trialBadge && (
                   <p className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-accent-50 px-2.5 py-0.5 text-xs font-semibold text-accent-700 ring-1 ring-accent-200 self-start">
                     <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-accent-500" />
                     {t.pricing.trialBadge}
