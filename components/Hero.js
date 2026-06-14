@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useT } from "@/components/LanguageProvider";
 import KpiBackground from "@/components/KpiBackground";
+import { shopbyjlcLinks } from "@/lib/shopbyjlc-links";
 
 export default function Hero() {
   const { t } = useT();
@@ -45,7 +46,7 @@ export default function Hero() {
 
           <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <a
-              href="#pricing"
+              href={shopbyjlcLinks.registerTrialPro}
               className="w-full rounded-lg bg-brand-500 px-6 py-3 text-center text-sm font-semibold text-white shadow-soft transition hover:bg-brand-600 sm:w-auto"
             >
               {t.hero.ctaPrimary}

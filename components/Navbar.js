@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useT } from "@/components/LanguageProvider";
 import LanguageToggle from "@/components/LanguageToggle";
+import { shopbyjlcLinks } from "@/lib/shopbyjlc-links";
 
 export default function Navbar() {
   const { t } = useT();
@@ -88,13 +89,13 @@ export default function Navbar() {
           <div className="flex items-center gap-2">
             <LanguageToggle />
             <a
-              href="https://www.shopbyjlc.com/"
+              href={shopbyjlcLinks.login}
               className="hidden rounded-full px-3 py-1.5 text-sm font-medium text-ink-600 transition hover:bg-white hover:text-ink-900 lg:inline"
             >
               {t.nav.signIn}
             </a>
-            <Link
-              href="/pricing"
+            <a
+              href={shopbyjlcLinks.registerTrialPro}
               className="relative inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-500 to-accent-500 px-4 py-2 text-sm font-semibold text-white shadow-soft transition hover:from-brand-600 hover:to-accent-600"
             >
               <span
@@ -102,7 +103,7 @@ export default function Navbar() {
                 className="h-1.5 w-1.5 rounded-full bg-white/90"
               />
               {t.nav.startFree}
-            </Link>
+            </a>
           </div>
         </div>
       </div>

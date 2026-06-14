@@ -1,10 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
 import { useT } from "@/components/LanguageProvider";
-import CheckoutModal from "@/components/CheckoutModal";
 import { PLAN_IDS, PLANS } from "@/lib/payments/plans";
+import { shopbyjlcLinks } from "@/lib/shopbyjlc-links";
 
 function Check() {
   return (
@@ -26,8 +25,6 @@ function Check() {
 export default function Pricing() {
   const { t } = useT();
   const highlightedIndex = PLAN_IDS.indexOf("pro");
-  const [openTier, setOpenTier] = useState(null);
-
   const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "info@shopbyjlc.com";
 
   const handleTierClick = (planId) => {
@@ -35,14 +32,14 @@ export default function Pricing() {
       window.location.href = `mailto:${contactEmail}?subject=ShopByJLC%20Enterprise%20inquiry`;
       return;
     }
+
     if (PLANS[planId]?.freeTrial) {
-      window.location.href = `mailto:${contactEmail}?subject=ShopByJLC%20free%20trial`;
+      window.location.href = shopbyjlcLinks.registerTrialPro;
       return;
     }
-    setOpenTier(planId);
-  };
 
-  const openTierData = openTier ? t.pricing.tiers[PLAN_IDS.indexOf(openTier)] : null;
+    window.location.href = shopbyjlcLinks.registerWithIntendedPlan(planId.toUpperCase());
+  };
 
   return (
     <section
@@ -134,12 +131,7 @@ export default function Pricing() {
         </div>
       </div>
 
-      <CheckoutModal
-        planId={openTier}
-        planLabel={openTierData?.name}
-        planPrice={openTierData?.price}
-        onClose={() => setOpenTier(null)}
-      />
+
     </section>
   );
 }
