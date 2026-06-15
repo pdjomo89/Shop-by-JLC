@@ -41,10 +41,11 @@ export default function Navbar() {
           className="pointer-events-none absolute -top-8 right-1/4 -z-0 h-24 w-48 rounded-full bg-accent-200/50 blur-3xl"
         />
 
-        <div className="container-page relative flex h-16 min-w-0 items-center justify-between gap-4">
+        <div className="container-page relative flex h-16 min-w-0 items-center justify-between gap-6">
+
           <Link
             href="/"
-            className="group flex shrink-0 items-center gap-2.5 font-semibold tracking-tight"
+            className="group flex shrink-0 items-center gap-2.5 whitespace-nowrap font-semibold tracking-tight"
           >
             <span className="relative grid h-10 w-10 place-items-center rounded-xl bg-white shadow-soft ring-1 ring-brand-200/70 transition group-hover:ring-brand-400">
               <Image
@@ -68,7 +69,7 @@ export default function Navbar() {
             </span>
           </Link>
 
-          <nav className="hidden min-w-0 flex-1 justify-center gap-1 text-sm xl:flex">
+          <nav className="ml-6 hidden min-w-0 flex-1 justify-center gap-1 pr-4 text-sm xl:flex">
             {links.map((l) => (
               <Link
                 key={l.href}
@@ -87,7 +88,7 @@ export default function Navbar() {
             ))}
           </nav>
 
-          <div className="relative z-[9999] flex shrink-0 items-center gap-2">
+          <div className="relative z-[9999] ml-3 flex shrink-0 items-center gap-3">
             <LanguageToggle className="shrink-0" />
 
             <a
