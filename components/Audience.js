@@ -216,7 +216,7 @@ export default function Audience() {
   if (!items.length) return null;
 
   return (
-    <section id="audience" className="border-t border-ink-100 py-20 sm:py-28">
+    <section id="audience" className="border-t border-ink-100 bg-gradient-to-br from-brand-50 via-brand-100/60 to-accent-50 py-20 sm:py-28">
       <div className="container-page">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-ink-800 sm:text-4xl">

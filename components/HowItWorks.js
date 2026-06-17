@@ -18,7 +18,8 @@ export default function HowItWorks() {
         sizes="100vw"
         className="object-cover"
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/70 to-white/85" />
+      <div className="absolute inset-0 bg-white/90" />
+      <div className="absolute inset-0 bg-gradient-to-br from-brand-100/70 via-white/55 to-accent-100/70" />
       <div className="container-page relative z-10">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-ink-800 sm:text-4xl">

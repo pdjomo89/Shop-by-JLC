@@ -10,6 +10,7 @@ export default function PageHeader({
   bgAlt = "",
   bgImageClassName = "",
   overlayClassName = "absolute inset-0 bg-gradient-to-b from-white/70 via-white/55 to-white/80",
+  large = false,
 }) {
   const { t } = useT();
   const page = t.pages?.[pageKey];
@@ -44,7 +45,12 @@ export default function PageHeader({
         className="pointer-events-none absolute -bottom-24 right-1/4 h-72 w-72 rounded-full bg-accent-200/40 blur-3xl"
       />
 
-      <div className="container-page relative py-16 sm:py-20">
+      <div
+        className={[
+          "container-page relative",
+          large ? "py-24 sm:py-32 lg:py-40" : "py-16 sm:py-20",
+        ].join(" ")}
+      >
         <nav aria-label="Breadcrumb" className="text-xs font-medium text-ink-500">
           <ol className="flex items-center gap-1.5">
             <li>

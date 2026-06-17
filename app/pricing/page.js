@@ -18,7 +18,7 @@ export const metadata = {
 export default function PricingPage() {
   return (
     <>
-      <PageHeader pageKey="pricing" />
+      <PageHeader pageKey="pricing" large />
       <Pricing />
     </>
   );

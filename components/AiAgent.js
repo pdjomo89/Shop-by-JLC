@@ -116,7 +116,7 @@ export default function AiAgent() {
   return (
     <section
       id="agent"
-      className="relative overflow-hidden border-t border-ink-100 bg-gradient-to-b from-white to-brand-50/40 py-20 sm:py-28"
+      className="relative overflow-hidden border-t border-ink-100 bg-gradient-to-br from-brand-100 via-brand-50/50 to-accent-100 py-20 sm:py-28"
     >
       <div className="container-page">
         <div className="mx-auto max-w-2xl text-center">
@@ -160,7 +160,7 @@ export default function AiAgent() {
 
           <div className="lg:col-span-3">
             <div className="flex h-[36rem] flex-col overflow-hidden rounded-2xl border border-ink-100 bg-white shadow-soft">
-              <header className="flex items-center justify-between border-b border-ink-100 px-5 py-3">
+              <header className="flex items-center justify-between border-b border-ink-100 bg-gradient-to-r from-brand-50 via-white to-accent-50 px-5 py-3">
                 <div className="flex items-center gap-2">
                   <span className="h-2 w-2 rounded-full bg-accent-500" />
                   <span className="text-sm font-semibold text-ink-800">
@@ -192,7 +192,12 @@ export default function AiAgent() {
                             key={i}
                             type="button"
                             onClick={() => send(p)}
-                            className="rounded-xl border border-ink-200 bg-white p-3 text-left text-sm text-ink-700 transition hover:border-brand-500 hover:bg-brand-50"
+                            className={[
+                              "rounded-xl border p-3 text-left text-sm text-ink-700 transition",
+                              i % 2 === 0
+                                ? "border-brand-200 bg-brand-50/60 hover:border-brand-500 hover:bg-brand-50"
+                                : "border-accent-200 bg-accent-50/60 hover:border-accent-500 hover:bg-accent-50",
+                            ].join(" ")}
                           >
                             {p}
                           </button>

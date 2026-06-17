@@ -23,7 +23,7 @@ export default function NewsPage() {
         bgImage="/mika-baumeister-_Y5jvYypnZA-unsplash.jpg"
         bgAlt="Neon NEWS sign glowing inside a classical building"
         bgImageClassName="object-[70%_30%]"
-        overlayClassName="absolute inset-0 bg-gradient-to-r from-white/90 via-white/60 to-white/10"
+        overlayClassName="absolute inset-0 bg-gradient-to-br from-brand-50/80 via-white/90 to-accent-50/80"
       />
       <News />
     </>

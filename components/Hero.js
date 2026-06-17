@@ -18,24 +18,24 @@ export default function Hero() {
         sizes="100vw"
         className="object-cover"
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-white/55 via-white/35 to-white/70" />
+      <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/65 to-white/90" />
       <div
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse at center, rgba(255,255,255,0.65) 0%, rgba(255,255,255,0.35) 45%, rgba(255,255,255,0) 80%)",
+            "radial-gradient(ellipse at center, rgba(255,255,255,1) 0%, rgba(255,255,255,0.85) 40%, rgba(255,255,255,0.3) 70%, rgba(255,255,255,0) 90%)",
         }}
       />
       <KpiBackground />
 
       <div className="relative z-10 container-page py-20 sm:py-28 lg:py-32">
-        <div className="mx-auto max-w-5xl text-center xl:max-w-6xl [text-shadow:0_1px_2px_rgba(255,255,255,0.6)]">
+        <div className="mx-auto max-w-5xl text-center xl:max-w-6xl">
           <span className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-brand-50 px-3 py-1 text-xs font-medium text-brand-700">
             <span className="h-2 w-2 rounded-full bg-accent-500" />
             {t.hero.badge}
           </span>
 
-          <h1 className="mt-6 text-balance text-4xl font-bold tracking-tight text-ink-800 sm:text-5xl lg:text-6xl xl:text-7xl">
+          <h1 className="mt-6 text-balance text-4xl font-bold tracking-tight text-ink-800 sm:text-5xl lg:text-6xl xl:text-7xl [text-shadow:0_1px_2px_rgba(255,255,255,0.7)]">
             {t.hero.headlinePart1} {t.hero.headlinePart2}
           </h1>
 
