@@ -1,10 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
 import { useT } from "@/components/LanguageProvider";
-import CheckoutModal from "@/components/CheckoutModal";
-import { PLAN_IDS, PLANS } from "@/lib/payments/plans";
+import { PLAN_IDS } from "@/lib/payments/plans";
+import { shopbyjlcLinks } from "@/lib/shopbyjlc-links";
 
 function Check() {
   return (
@@ -23,26 +22,25 @@ function Check() {
   );
 }
 
+function tierHref(planId) {
+  const planMap = {
+    trial: null,
+    starter: "STARTER",
+    pro: "PRO",
+    business: "BUSINESS",
+    enterprise: "ENTERPRISE",
+  };
+
+  if (planId === "trial") {
+    return shopbyjlcLinks.registerTrialPro;
+  }
+
+  return shopbyjlcLinks.registerWithIntendedPlan(planMap[planId]);
+}
+
 export default function Pricing() {
   const { t } = useT();
   const highlightedIndex = PLAN_IDS.indexOf("pro");
-  const [openTier, setOpenTier] = useState(null);
-
-  const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "info@shopbyjlc.com";
-
-  const handleTierClick = (planId) => {
-    if (PLANS[planId]?.contactOnly) {
-      window.location.href = `mailto:${contactEmail}?subject=ShopByJLC%20Enterprise%20inquiry`;
-      return;
-    }
-    if (PLANS[planId]?.freeTrial) {
-      window.location.href = `mailto:${contactEmail}?subject=ShopByJLC%20free%20trial`;
-      return;
-    }
-    setOpenTier(planId);
-  };
-
-  const openTierData = openTier ? t.pricing.tiers[PLAN_IDS.indexOf(openTier)] : null;
 
   return (
     <section
@@ -73,7 +71,9 @@ export default function Pricing() {
           {t.pricing.tiers.map((tier, i) => {
             const highlighted = i === highlightedIndex;
             const planId = PLAN_IDS[i];
-            const isFreeTrial = PLANS[planId]?.freeTrial;
+            const isFreeTrial = planId === "trial";
+            const href = tierHref(planId);
+
             return (
               <div
                 key={tier.name}
@@ -92,20 +92,27 @@ export default function Pricing() {
                     </span>
                   )}
                 </div>
+
                 <p className="mt-2 text-sm text-ink-500">{tier.description}</p>
 
                 <div className="mt-6 flex items-baseline gap-1 whitespace-nowrap">
                   <span className="text-3xl font-bold tracking-tight text-ink-800 xl:text-2xl 2xl:text-3xl">
                     {tier.price}
                   </span>
+
                   {!isFreeTrial && (
-                    <span className="text-xs font-medium text-ink-400">{t.pricing.perMonth}</span>
+                    <span className="text-xs font-medium text-ink-400">
+                      {t.pricing.perMonth}
+                    </span>
                   )}
                 </div>
 
-                {!PLANS[planId]?.contactOnly && !isFreeTrial && t.pricing.trialBadge && (
+                {isFreeTrial && t.pricing.trialBadge && (
                   <p className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-accent-50 px-2.5 py-0.5 text-xs font-semibold text-accent-700 ring-1 ring-accent-200 self-start">
-                    <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-accent-500" />
+                    <span
+                      aria-hidden="true"
+                      className="h-1.5 w-1.5 rounded-full bg-accent-500"
+                    />
                     {t.pricing.trialBadge}
                   </p>
                 )}
@@ -119,9 +126,8 @@ export default function Pricing() {
                   ))}
                 </ul>
 
-                <button
-                  type="button"
-                  onClick={() => handleTierClick(planId)}
+                <a
+                  href={href}
                   className={[
                     "mt-8 rounded-lg px-4 py-3 text-center text-sm font-semibold transition",
                     highlighted
@@ -130,19 +136,12 @@ export default function Pricing() {
                   ].join(" ")}
                 >
                   {tier.cta}
-                </button>
+                </a>
               </div>
             );
           })}
         </div>
       </div>
-
-      <CheckoutModal
-        planId={openTier}
-        planLabel={openTierData?.name}
-        planPrice={openTierData?.price}
-        onClose={() => setOpenTier(null)}
-      />
     </section>
   );
 }
